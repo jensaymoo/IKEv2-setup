@@ -130,10 +130,10 @@ echo
 apt-get -o Acquire::ForceIPv4=true --with-new-pkgs upgrade -y
 apt autoremove -y
 
-debconf-set-selections <<< "postfix postfix/mailname string ${VPNHOST}"
-debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+#debconf-set-selections <<< "postfix postfix/mailname string ${VPNHOST}"
+#debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
-apt-get -o Acquire::ForceIPv4=true install -y language-pack-en strongswan libstrongswan-standard-plugins strongswan-libcharon libcharon-standard-plugins libcharon-extra-plugins  iptables-persistent postfix mutt unattended-upgrades certbot uuid-runtime
+apt-get -o Acquire::ForceIPv4=true install -y language-pack-en strongswan libstrongswan-standard-plugins strongswan-libcharon libcharon-standard-plugins libcharon-extra-plugins  iptables-persistent  mutt unattended-upgrades certbot uuid-runtime
 
 
 echo
@@ -339,19 +339,19 @@ timedatectl set-timezone "${TZONE}"
 /usr/sbin/update-locale LANG=en_GB.UTF-8
 
 
-sed -r \
--e "s/^myhostname =.*$/myhostname = ${VPNHOST}/" \
--e 's/^inet_interfaces =.*$/inet_interfaces = loopback-only/' \
--i.original /etc/postfix/main.cf
+#sed -r \
+#-e "s/^myhostname =.*$/myhostname = ${VPNHOST}/" \
+#-e 's/^inet_interfaces =.*$/inet_interfaces = loopback-only/' \
+#-i.original /etc/postfix/main.cf
 
-grep -Fq 'jawj/IKEv2-setup' /etc/aliases || echo "
-# https://github.com/jawj/IKEv2-setup
-root: ${EMAILADDR}
-${LOGINUSERNAME}: ${EMAILADDR}
-" >> /etc/aliases
+#grep -Fq 'jawj/IKEv2-setup' /etc/aliases || echo "
+## https://github.com/jawj/IKEv2-setup
+#root: ${EMAILADDR}
+#${LOGINUSERNAME}: ${EMAILADDR}
+#" >> /etc/aliases
 
-newaliases
-service postfix restart
+#newaliases
+#service postfix restart
 
 
 sed -r \
