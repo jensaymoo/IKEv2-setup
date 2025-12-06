@@ -307,7 +307,7 @@ echo
 echo "--- Creating configuration files ---"
 echo
 
-cd "~"
+cd "/root"
 
 cat << EOF > vpn-ios.mobileconfig
 <?xml version='1.0' encoding='UTF-8'?>
